@@ -8,7 +8,8 @@ window.getStackTrace = ->
 
 app = angular.module("app",
     ["ngResource", "ui.router", 'ngIdle', "app.services", "app.directives", "ui.bootstrap",
-     "ui.validate", "xeditable", "pascalprecht.translate", "pageslide-directive", "ui.grid"])
+     "ui.validate", "xeditable", "pascalprecht.translate", "pageslide-directive", "ui.grid",
+     "Devise"])
 
 app.run ($rootScope, $location, $idle, $state, $interval, $window, $templateCache, editableOptions, editableThemes) ->
     $templateCache.put 'ui-grid/uiGridViewport',

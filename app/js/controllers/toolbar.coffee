@@ -1,4 +1,4 @@
-angular.module("app").controller "ToolbarController", ($scope, $rootScope, Shared, Wallet) ->
+angular.module("app").controller "ToolbarController", ($scope, $rootScope, Shared, Wallet, Auth) ->
 
     $scope.back = ->
         $scope.history_back()
@@ -16,3 +16,13 @@ angular.module("app").controller "ToolbarController", ($scope, $rootScope, Share
             e.details = null for e in errors.list
         else
             errors.new_error = false
+
+    Auth.currentUser().then (user) ->
+        console.log "------ currentUser ------>", user
+
+    $scope.logout = ->
+        Auth.logout().then ->
+            console.log "------ logged out ------"
+            location.reload(true)
+
+

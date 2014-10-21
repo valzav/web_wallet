@@ -27,7 +27,8 @@
     </ul>
   </li>
 
-  <li class="lock"><a ng-click="lock()" href><i class="fa fa-lock fa-fw"></i>{{ 'index.lock' | translate }}</a></li>
+  <li><a ui-sref="account({name: '{{current_user.name}}'})"><i class="fa fa-user fa-fw"></i> {{current_user.name}}</a></li>
+  <li class="lock"><a ng-click="logout()"><i class="fa fa-sign-out fa-fw"></i>Log out</a></li>
   <li ng-show="context_help.show" class="context-help">
     <a ng-click="open_context_help()">{{'help.title'|translate}}<i class="fa fa-angle-double-left fa-fw"/></a>
   </li>
