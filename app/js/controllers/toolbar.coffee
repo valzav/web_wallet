@@ -24,5 +24,3 @@ angular.module("app").controller "ToolbarController", ($scope, $rootScope, Share
         Auth.logout().then ->
             console.log "------ logged out ------"
             window.location.href = "/"
-
-
