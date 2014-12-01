@@ -38,7 +38,7 @@ processRpcError = (response, Shared) ->
             magic_unicorn.log_message("rpc error: #{error_msg} (#{response.status})\n#{stack}") if magic_unicorn?
             Shared.addError(error_msg, stack, response.data?.error?.detail)
         else
-            console.log "HTTP Error: #{response}"
+            console.log "HTTP Error: ", response
 
 
 servicesModule.factory "myHttpInterceptor", ($q, Shared) ->

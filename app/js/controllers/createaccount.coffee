@@ -19,14 +19,14 @@ angular.module("app").controller "CreateAccountController", ($scope, $location, 
         form = @createaccount
         form.account_name.error_message = null
         name = $scope.f.name
+
+        deferred = $q.defer()
+
         error_handler = (response) ->
             if response.data.error
                 form.account_name.error_message = response.data.error.message
-                return true
-            else
-                return false
+            deferred.reject(response)
 
-        deferred = $q.defer()
         Wallet.create_account(name, {}, error_handler).then (account_key) ->
             get_coupon($scope.f.coupon, true, name, account_key).then (coupon) ->
                 console.log "------ coupon ------>", coupon
@@ -42,6 +42,7 @@ angular.module("app").controller "CreateAccountController", ($scope, $location, 
                     $scope.f.coupon_ok = false
                     $scope.f.coupon_error = "Coupon is already redeemed"
                 deferred.resolve(true)
+
         $rootScope.showLoadingIndicator deferred.promise
 
     $scope.coupon_changed = ->
