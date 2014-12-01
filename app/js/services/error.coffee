@@ -30,12 +30,15 @@ processRpcError = (response, Shared) ->
         error_msg = response.message
 
     unless dont_report
-        error_msg = error_msg.substring(0, 512)
-        stack = if response.config?.stack then response.config?.stack else ""
-        stack = stack.replace(/http\:.+app\.js([\d:]+)/mg, "app.js$1").replace(/^Error/,"RPC Server Error in '#{method}'") if stack
-        console.log "RPC Server Error: #{error_msg} (#{response.status})\n#{response.config?.stack}"
-        magic_unicorn.log_message("rpc error: #{error_msg} (#{response.status})\n#{stack}") if magic_unicorn?
-        Shared.addError(error_msg, stack, response.data?.error?.detail)
+        if error_msg
+            error_msg = error_msg.substring(0, 512)
+            stack = if response.config?.stack then response.config?.stack else ""
+            stack = stack.replace(/http\:.+app\.js([\d:]+)/mg, "app.js$1").replace(/^Error/,"RPC Server Error in '#{method}'") if stack
+            console.log "RPC Server Error: #{error_msg} (#{response.status})\n#{response.config?.stack}"
+            magic_unicorn.log_message("rpc error: #{error_msg} (#{response.status})\n#{stack}") if magic_unicorn?
+            Shared.addError(error_msg, stack, response.data?.error?.detail)
+        else
+            console.log "HTTP Error: #{response}"
 
 
 servicesModule.factory "myHttpInterceptor", ($q, Shared) ->

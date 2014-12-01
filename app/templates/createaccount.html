@@ -23,14 +23,21 @@
           <div class="form-group row"
                ng-class="{ 'has-error' : (createaccount.account_name.$invalid || createaccount.account_name.error_message) && !createaccount.account_name.$pristine }">
             <label for="account_name" class="col-sm-2 control-label" translate>account.name</label>
-            <div class="col-sm-10">
+            <div class="col-sm-6 input-group">
               <input-name autofocus popover-append-to-body='true' ng-model="f.name" form-name="createaccount" show-note-1="true" show-note-2="false"/>
             </div>
           </div>
           <div class="form-group row">
-            <label for="website" class="col-sm-2 control-label" translate>account.website</label>
-            <div class="col-sm-10">
-              <input id="website" ng-model="website" name="website" class="form-control" placeholder="{{ 'account.website_tip' | translate }}"/>
+            <label for="coupon" class="col-sm-2 control-label">Coupon</label>
+            <div class="col-sm-6 input-group">
+              <input id="coupon" ng-model="f.coupon" ng-change="coupon_changed()" name="coupon" class="form-control" placeholder="Coupon (Optional)"/>
+              <span ng-if="f.coupon_ok" class="input-group-addon label-success"><i class="fa fa-check"></i></span>
+              <span class="help-block text-danger" ng-show="f.coupon_error">{{f.coupon_error}}</span>
+            </div>
+          </div>
+          <div ng-if="f.coupon_ok" class="form-group">
+            <div class="col-sm-offset-2 col-sm-3 input-group">
+              <div class="alert alert-success" role="alert"><h4>{{ f.coupon_amount | formatAsset }}</h4></div>
             </div>
           </div>
           <div class="form-group row m-top">
