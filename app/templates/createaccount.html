@@ -31,13 +31,8 @@
             <label for="coupon" class="col-sm-2 control-label">Coupon</label>
             <div class="col-sm-6 input-group">
               <input id="coupon" ng-model="f.coupon" ng-change="coupon_changed()" name="coupon" class="form-control" placeholder="Coupon (Optional)"/>
-              <span ng-if="f.coupon_ok" class="input-group-addon label-success"><i class="fa fa-check"></i></span>
+              <span ng-if="f.coupon_ok" class="input-group-addon label-success"><i class="fa fa-check"></i> {{ f.coupon_amount }}</span>
               <span class="help-block text-danger" ng-show="f.coupon_error">{{f.coupon_error}}</span>
-            </div>
-          </div>
-          <div ng-if="f.coupon_ok" class="form-group">
-            <div class="col-sm-offset-2 col-sm-3 input-group">
-              <div class="alert alert-success" role="alert"><h4>{{ f.coupon_amount | formatAsset }}</h4></div>
             </div>
           </div>
           <div class="form-group row m-top">

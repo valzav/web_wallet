@@ -29,3 +29,7 @@ span.help-block {
 .hgroup-button {
 	margin-bottom: 0;
 }
+
+.input-group-addon.label-success {
+	color: #fff;
+}
